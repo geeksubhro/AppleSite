@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header with Icons</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        background-color: rgba(0, 0, 0, 0.913);
+        color: #fff;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header img {
+        height: 40px;
+      }
+
+      #menu-icon {
+        display: none;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      #menu-icon.open {
+        transform: rotate(90deg);
+      }
+
+      .nav-icons,
+      .options {
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-icons i {
+        font-size: 24px;
+        margin-right: 20px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .options a {
+        text-decoration: none;
+        color: #fff;
+        margin-right: 20px;
+        font-size: 18px;
+        transition: color 0.3s ease-in-out;
+      }
+
+      .options a:hover {
+        color: #f1f1f1;
+      }
+
+      .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.927);
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+
+      .sidebar a {
+        padding: 10px 15px;
+        text-decoration: none;
+        font-size: 20px;
+        color: #fff;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .sidebar a:hover {
+        color: #f1f1f1;
+      }
+
+      .content {
+        transition: margin-right 0.5s;
+      }
+
+      @media (max-width: 768px) {
+        
+        #menu-icon {
+          display: block;
+        }
+
+        .options {
+          display: none;
+        }
+
+        .nav-icons {
+          justify-content: flex-start; /* align icons to the left */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="your-logo.png" alt="Logo" />
+
+      <div class="options">
+        <a href="#">iPhone</a>
+        <a href="#">iPad</a>
+        <a href="#">Watch</a>
+        <a href="#">OS</a>
+      </div>
+
+      <div class="nav-icons">
+        <i class="fa fa-search" aria-hidden="true"></i>
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <i class="fa fa-bars" id="menu-icon" aria-hidden="true"></i>
+      </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+      <a href="#" onclick="closeSidebar()">Close</a>
+      <!-- Add other sidebar items as needed -->
+      <a href="#">iPhone</a>
+      <a href="#">iPad</a>
+      <a href="#">Watch</a>
+      <a href="#">OS</a>
+    </div>
+
+    <div class="content" onclick="closeSidebar()">
+      <!-- Content of the page goes here -->
+    </div>
+
+    <script>
+      const menuIcon = document.getElementById("menu-icon");
+      const sidebar = document.getElementById("sidebar");
+      const content = document.querySelector(".content");
+
+      menuIcon.addEventListener("click", () => {
+        menuIcon.classList.toggle("open");
+        sidebar.style.width = sidebar.style.width === "250px" ? "0" : "250px";
+        content.style.marginRight =
+          content.style.marginRight === "250px" ? "0" : "250px";
+      });
+
+      function closeSidebar() {
+        if (sidebar.style.width === "250px") {
+          menuIcon.classList.remove("open");
+          sidebar.style.width = "0";
+          content.style.marginRight = "0";
+        }
+      }
+
+      const navIcons = document.querySelectorAll(".nav-icons i");
+
+      navIcons.forEach((icon) => {
+        icon.addEventListener("mouseover", () => {
+          icon.style.transform = "scale(1.2)";
+        });
+
+        icon.addEventListener("mouseout", () => {
+          icon.style.transform = "scale(1)";
+        });
+      });
+    </script>
+  </body>
+</html>
